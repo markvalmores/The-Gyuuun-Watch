@@ -1,0 +1,141 @@
+{
+  "entities": {
+    "UserProfile": {
+      "title": "UserProfile",
+      "description": "User profile information and smartwatch sync targets",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string", "description": "User ID" },
+        "displayName": { "type": "string", "description": "Display Name" },
+        "email": { "type": "string", "description": "User Email" },
+        "pairedWatchId": { "type": "string", "description": "Currently paired watch ID" },
+        "pairedWatchName": { "type": "string", "description": "Name of paired watch" },
+        "stepGoal": { "type": "number", "description": "Daily step goal" },
+        "usagyuunCheerMode": { "type": "boolean", "description": "Enable Usagyuun VTuber cheer mode" },
+        "createdAt": { "type": "string", "description": "ISO Timestamp" },
+        "updatedAt": { "type": "string", "description": "ISO Timestamp" }
+      },
+      "required": ["uid", "displayName", "email"]
+    },
+    "WatchSettings": {
+      "title": "WatchSettings",
+      "description": "Smartwatch time, display and widget preferences",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string", "description": "User ID" },
+        "timeFormat": { "type": "string", "enum": ["12h", "24h"], "description": "Time display format" },
+        "timeZone": { "type": "string", "description": "Timezone string" },
+        "autoSyncTime": { "type": "boolean", "description": "Auto sync time from phone" },
+        "screenTimeout": { "type": "number", "description": "Screen timeout seconds (5,10,15,30,0 for AOD)" },
+        "brightness": { "type": "number", "description": "Brightness 1 to 100" },
+        "liftToWake": { "type": "boolean", "description": "Lift wrist to wake screen" },
+        "alwaysOnDisplay": { "type": "boolean", "description": "Enable Always On Display" },
+        "aodStyle": { "type": "string", "description": "AOD clock style" },
+        "widgets": { "type": "string", "description": "JSON string of enabled active widgets" },
+        "updatedAt": { "type": "string", "description": "ISO Timestamp" }
+      },
+      "required": ["userId", "timeFormat", "brightness"]
+    },
+    "CustomWallpaper": {
+      "title": "CustomWallpaper",
+      "description": "Custom watch face wallpaper created in the studio",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "description": "Wallpaper unique ID" },
+        "userId": { "type": "string", "description": "User ID" },
+        "title": { "type": "string", "description": "Wallpaper title" },
+        "bgType": { "type": "string", "enum": ["preset", "gradient", "custom_image", "usagyuun_animated"], "description": "Background style type" },
+        "bgValue": { "type": "string", "description": "Preset key, image URL or CSS color string" },
+        "fontStyle": { "type": "string", "description": "Clock font family" },
+        "fontColor": { "type": "string", "description": "Hex color code for time" },
+        "timePosition": { "type": "string", "description": "Top, Center, Bottom" },
+        "selectedComplications": { "type": "string", "description": "Comma separated active complications" },
+        "isActive": { "type": "boolean", "description": "Is currently synced to watch" },
+        "createdAt": { "type": "string", "description": "ISO Timestamp" }
+      },
+      "required": ["id", "userId", "title", "bgType", "bgValue", "fontStyle", "fontColor"]
+    },
+    "ActivityLog": {
+      "title": "ActivityLog",
+      "description": "Daily activity summary log from Huafit watch",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "description": "Log ID (e.g. YYYY-MM-DD)" },
+        "userId": { "type": "string", "description": "User ID" },
+        "date": { "type": "string", "description": "Date string YYYY-MM-DD" },
+        "steps": { "type": "number", "description": "Total steps" },
+        "calories": { "type": "number", "description": "Calories burned in kcal" },
+        "distanceKm": { "type": "number", "description": "Distance walked in km" },
+        "activeMinutes": { "type": "number", "description": "Active workout minutes" },
+        "heartRateAvg": { "type": "number", "description": "Average BPM" },
+        "heartRateMin": { "type": "number", "description": "Min BPM" },
+        "heartRateMax": { "type": "number", "description": "Max BPM" },
+        "spO2": { "type": "number", "description": "SpO2 percentage" },
+        "stressLevel": { "type": "number", "description": "Stress level 0-100" },
+        "sleepHours": { "type": "number", "description": "Total sleep hours" },
+        "sleepScore": { "type": "number", "description": "Sleep score 0-100" },
+        "lastSyncedAt": { "type": "string", "description": "ISO Timestamp" }
+      },
+      "required": ["id", "userId", "date", "steps", "calories", "distanceKm"]
+    },
+    "Workout": {
+      "title": "Workout",
+      "description": "Individual recorded workout session",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "description": "Workout ID" },
+        "userId": { "type": "string", "description": "User ID" },
+        "type": { "type": "string", "description": "Workout type (Run, Cycle, Walk, Usagyuun Dance, HIIT, Jump Rope)" },
+        "durationSeconds": { "type": "number", "description": "Duration in seconds" },
+        "caloriesBurned": { "type": "number", "description": "Calories burned" },
+        "distanceKm": { "type": "number", "description": "Distance in km" },
+        "avgBpm": { "type": "number", "description": "Average Heart Rate" },
+        "usagyuunCheers": { "type": "number", "description": "Number of Usagyuun mascot high-fives during workout" },
+        "timestamp": { "type": "string", "description": "ISO Timestamp" }
+      },
+      "required": ["id", "userId", "type", "durationSeconds", "caloriesBurned"]
+    },
+    "DeviceState": {
+      "title": "DeviceState",
+      "description": "Connected Huafit Smart Watch status and info",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string", "description": "User ID" },
+        "deviceName": { "type": "string", "description": "Device Model Name" },
+        "macAddress": { "type": "string", "description": "Device MAC or Serial" },
+        "batteryLevel": { "type": "number", "description": "Battery percentage 0-100" },
+        "isCharging": { "type": "boolean", "description": "Charging status" },
+        "connectionStatus": { "type": "string", "description": "connected, disconnected, pairing, syncing" },
+        "firmwareVersion": { "type": "string", "description": "Current firmware version" },
+        "lastSyncTime": { "type": "string", "description": "ISO Timestamp" }
+      },
+      "required": ["userId", "deviceName", "connectionStatus", "firmwareVersion"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "UserProfile",
+      "description": "User profile collection"
+    },
+    "/users/{userId}/settings/{settingsId}": {
+      "schema": "WatchSettings",
+      "description": "Watch settings for user"
+    },
+    "/users/{userId}/wallpapers/{wallpaperId}": {
+      "schema": "CustomWallpaper",
+      "description": "Custom watch face wallpapers"
+    },
+    "/users/{userId}/activity/{activityId}": {
+      "schema": "ActivityLog",
+      "description": "Daily activity tracking logs"
+    },
+    "/users/{userId}/workouts/{workoutId}": {
+      "schema": "Workout",
+      "description": "Recorded workout sessions"
+    },
+    "/users/{userId}/device/{deviceId}": {
+      "schema": "DeviceState",
+      "description": "Paired watch device state"
+    }
+  }
+}

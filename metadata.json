@@ -1,0 +1,6 @@
+{
+  "name": "Huafit Watch by Usagyuun VTuber",
+  "description": "Smartwatch companion app featuring custom wallpaper studio, time settings, real-time activity tracking, BLE & QR pairing, OTA firmware updates, and Usagyuun VTuber cheer companion.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
